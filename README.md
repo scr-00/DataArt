@@ -32,8 +32,3 @@ This stage adds a polished, responsive design to the static HTML skeleton using 
 - **Mobile-Friendly**:
   - Single-column layout for small screens.
   - Readable text sizes and optimized spacing.
-
-
-
-**Author:** [Your Name]  
-**License:** MIT
