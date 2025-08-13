@@ -1,7 +1,7 @@
 # 🎶 Coldplay Live Concert Timeline
 
 ## Stage 1: Static Skeleton (HTML)
-This project is a timeline-based web app that showcases Coldplay's most iconic live concerts. The goal of this first stage is to create a static HTML structure that will later be enhanced with dynamic content, filters, and interactivity.
+This project is a timeline-based web app that showcases Coldplay's most iconic live concerts. The goal of this first stage was to create a static HTML structure that will later be enhanced with dynamic content, filters, and interactivity.
 
 ### 🔧 Features in This Stage
 - **Header**: Includes the app logo (Coldplay Live Timeline) and a theme toggle button (currently non-functional).
@@ -14,21 +14,31 @@ This project is a timeline-based web app that showcases Coldplay's most iconic l
 ---
 
 ## Stage 2: Responsive Styling (CSS)
-This stage adds a polished, responsive design to the static HTML skeleton using CSS Grid and Flexbox, along with a Coldplay-inspired dark theme and accent colors.
+In this stage, the app received a polished, responsive design using CSS Grid, Flexbox, and a Coldplay-inspired color scheme.
 
 ### 🎨 Features in This Stage
-- **Responsive Layout**: 
-  - CSS Grid for the timeline section.
-  - Flexbox for the header and navigation bar.
+- **Responsive Layout**:  
+  - CSS Grid for timeline layout.  
+  - Flexbox for header and navigation bar.  
   - Breakpoints for mobile (<768px), tablet (768–1023px), and desktop (≥1024px).
-- **Header Styling**: Dark gradient background, bold typography, and a highlighted theme toggle button in Coldplay yellow.
-- **Timeline Design**:
-  - Vertical timeline line with connected circular event markers.
-  - Clean layout for event details and images.
-- **Typography & Colors**: High-contrast dark background with warm yellow highlights.
-- **Modal Styling**:
-  - Hidden by default, full-screen overlay style.
-  - Ready for future interactive content.
-- **Mobile-Friendly**:
-  - Single-column layout for small screens.
-  - Readable text sizes and optimized spacing.
+- **Header Styling**: Dark gradient background, bold typography, Coldplay yellow theme toggle button.
+- **Timeline Design**: Vertical timeline with connected circular event markers.
+- **Typography & Colors**: Dark background with warm yellow highlights for contrast.
+- **Modal Styling**: Hidden by default with overlay styling.
+- **Mobile-Friendly**: Single-column layout and optimized spacing for small screens.
+
+---
+
+## Stage 3: Interactivity (JavaScript + JSON)
+This stage introduced dynamic content loading and modal interactivity using **vanilla JavaScript**.
+
+### 🖱 Features in This Stage
+- **Events Data**:  
+  - Added `data/events.json` with 8 Coldplay concerts (year, title, description, image, category).
+- **Dynamic Rendering**:  
+  - `script.js` fetches `events.json` and generates timeline event cards dynamically inside `#timeline`.
+- **Interactive Modals**:  
+  - Clicking an event opens a modal with full event details (image, year, description, category).
+  - Modal can be closed by clicking the close button or outside the content area.
+- **Error Handling**:  
+  - Console error logs if `events.json` fails to load.
