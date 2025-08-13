@@ -168,3 +168,21 @@ figcaption {
     grid-template-columns: 1fr 3fr;
   }
 }
+
+.modal-content {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 5% auto;
+  position: relative;
+}
+
+#modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ffb703;
+}
