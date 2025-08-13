@@ -1,0 +1,58 @@
+[
+  {
+    "year": "2022",
+    "title": "Music of the Spheres – Buenos Aires",
+    "description": "Coldplay performed at River Plate Stadium in Buenos Aires with dazzling lights and eco-conscious themes.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Coldplay_MOTS_Tour_2022_Buenos_Aires.jpg",
+    "category": "World Tour"
+  },
+  {
+    "year": "2016",
+    "title": "Glastonbury Festival",
+    "description": "Coldplay headlined the Glastonbury Festival for the fourth time, delivering a career-spanning set.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/0/09/Coldplay_Glastonbury_2016.jpg",
+    "category": "Festival"
+  },
+  {
+    "year": "2012",
+    "title": "Mylo Xyloto Tour – Paris",
+    "description": "A vibrant show with interactive LED wristbands and energetic performances in Paris.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/1/12/Coldplay_Paris_2012.jpg",
+    "category": "World Tour"
+  },
+  {
+    "year": "2008",
+    "title": "Viva La Vida Tour – London",
+    "description": "The band performed at Wembley with a mix of their greatest hits and new material from Viva La Vida.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/8/86/Coldplay_Viva_La_Vida_Tour.jpg",
+    "category": "World Tour"
+  },
+  {
+    "year": "2005",
+    "title": "Live 8 – Hyde Park",
+    "description": "Coldplay joined the global Live 8 charity concert with a memorable performance in London.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/9/96/Coldplay_Live8_2005.jpg",
+    "category": "Charity"
+  },
+  {
+    "year": "2002",
+    "title": "A Rush of Blood to the Head Tour – Los Angeles",
+    "description": "An intimate yet powerful show that solidified Coldplay's rise to global fame.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Coldplay_LA_2002.jpg",
+    "category": "World Tour"
+  },
+  {
+    "year": "2000",
+    "title": "Parachutes Tour – Manchester",
+    "description": "A raw and emotional performance following the release of their debut album, Parachutes.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Coldplay_Parachutes_Tour_2000.jpg",
+    "category": "Early Tour"
+  },
+  {
+    "year": "1999",
+    "title": "Camden Falcon Pub",
+    "description": "One of Coldplay’s earliest gigs before their debut album, in an intimate London venue.",
+    "imageURL": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Coldplay_Camden_Falcon_1999.jpg",
+    "category": "Early Performance"
+  }
+]
