@@ -1,0 +1,11 @@
+{
+  "name": "coldplay-timeline",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && live-server"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
