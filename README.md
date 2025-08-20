@@ -42,3 +42,44 @@ This stage introduced dynamic content loading and modal interactivity using **va
   - Modal can be closed by clicking the close button or outside the content area.
 - **Error Handling**:  
   - Console error logs if `events.json` fails to load.
+
+---
+
+## Stage 4: Static Typing & Modularization (TypeScript)
+This stage introduced TypeScript for type safety, modular code organization, and stricter development practices.
+
+### 🛠 Features in This Stage
+- **TypeScript Initialization**:  
+  - Added `tsconfig.json` with strict mode enabled.
+- **Code Modularization**:  
+  - Converted `script.js` into `src/index.ts`.  
+  - Created separate modules:  
+    - `fetcher.ts` → loads and parses events.  
+    - `renderer.ts` → renders events into the timeline.  
+    - `modal.ts` → controls modal open/close logic.
+- **Interfaces & Types**: Defined `Event` interface with fields (year, title, description, imageURL, category).
+- **Build Output**:  
+  - TypeScript compiles to plain JavaScript in the `dist/` folder.  
+  - Browser runs the compiled version while devs work with TypeScript source.
+
+---
+
+## Stage 5: React Rebuild (Vite + TypeScript + React)
+In this stage, the app was rebuilt as a **React application** for better scalability, reusability, and modern UI development.
+
+### ⚛️ Features in This Stage
+- **Vite + React + TypeScript Setup**: Initialized using Vite’s React-TS template.
+- **Component Structure**:  
+  - `<Header>` → logo + theme toggle.  
+  - `<Timeline>` → maps through events and renders markers.  
+  - `<EventMarker>` → individual timeline dots with year/title.  
+  - `<EventModal>` → detailed event popup (via state).  
+  - `<FilterPanel>` (placeholder for future filters).  
+- **State Management**:  
+  - `useState` + `useEffect` used to fetch events and manage modal visibility.  
+- **Dynamic Rendering**:  
+  - Events loaded from `public/events.json`.  
+  - Clicking markers opens modal with full details.  
+- **Styling**: Imported existing CSS, with option to migrate to CSS Modules or styled-components.  
+- **Future Proofing**: Code structured for future features like filtering, bookmarks, or theme switching.
+
