@@ -1,202 +1,128 @@
-/**
- * Accessible Timeline Component
- * Renders timeline with full keyboard navigation and screen reader support
- */
+import { useState, useRef, useEffect } from 'react'
+import { EventData } from '../types'
+import EventMarker from './EventMarker'
 
-import React, { useRef, useEffect } from 'react';
-import EventMarker from './EventMarker';
-import LoadingSpinner from './LoadingSpinner';
-import { ErrorDisplay } from './LoadingSpinner';
-import type { TimelineProps } from '@/types';
+interface TimelineProps {
+  events: EventData[];
+  onEventClick: (event: EventData) => void;
+}
 
-const Timeline: React.FC<TimelineProps> = ({ 
-  events, 
-  onEventClick, 
-  isLoading = false, 
-  error = null 
-}) => {
-  const timelineRef = useRef<HTMLElement>(null);
-  const currentEventIndex = useRef<number>(-1);
+export default function Timeline({ events, onEventClick }: TimelineProps) {
+  const [activeIndex, setActiveIndex] = useState<number>(-1)
+  const timelineRef = useRef<HTMLElement>(null)
+  const markerRefs = useRef<(HTMLElement | null)[]>([])
 
-  // Handle keyboard navigation for timeline
-  const handleTimelineKeyDown = (event: React.KeyboardEvent) => {
-    if (!timelineRef.current) return;
-    
-    const eventElements = timelineRef.current.querySelectorAll<HTMLElement>('[role="button"][data-event-id]');
-    
-    switch (event.key) {
+  // Sort events by year (newest first)
+  const sortedEvents = [...events].sort((a, b) => 
+    parseInt(b.year) - parseInt(a.year)
+  )
+
+  useEffect(() => {
+    // Initialize marker refs array
+    markerRefs.current = markerRefs.current.slice(0, sortedEvents.length)
+  }, [sortedEvents])
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const currentActiveIndex = activeIndex
+
+    switch (e.key) {
       case 'ArrowDown':
       case 'ArrowRight':
-        event.preventDefault();
-        navigateToEvent(eventElements, 1);
-        break;
-        
+        e.preventDefault()
+        const nextIndex = currentActiveIndex < sortedEvents.length - 1 ? currentActiveIndex + 1 : 0
+        setActiveIndex(nextIndex)
+        markerRefs.current[nextIndex]?.focus()
+        break
+
       case 'ArrowUp':
       case 'ArrowLeft':
-        event.preventDefault();
-        navigateToEvent(eventElements, -1);
-        break;
-        
+        e.preventDefault()
+        const prevIndex = currentActiveIndex > 0 ? currentActiveIndex - 1 : sortedEvents.length - 1
+        setActiveIndex(prevIndex)
+        markerRefs.current[prevIndex]?.focus()
+        break
+
       case 'Home':
-        event.preventDefault();
-        focusEvent(eventElements, 0);
-        break;
-        
+        e.preventDefault()
+        setActiveIndex(0)
+        markerRefs.current[0]?.focus()
+        break
+
       case 'End':
-        event.preventDefault();
-        focusEvent(eventElements, eventElements.length - 1);
-        break;
-        
-      case 'Enter':
-      case ' ':
-        event.preventDefault();
-        const focusedElement = document.activeElement as HTMLElement;
-        if (focusedElement && focusedElement.hasAttribute('data-event-id')) {
-          focusedElement.click();
-        }
-        break;
+        e.preventDefault()
+        const lastIndex = sortedEvents.length - 1
+        setActiveIndex(lastIndex)
+        markerRefs.current[lastIndex]?.focus()
+        break
     }
-  };
-
-  const navigateToEvent = (eventElements: NodeListOf<HTMLElement>, direction: number) => {
-    const currentFocusIndex = Array.from(eventElements).findIndex(el => el === document.activeElement);
-    let newIndex;
-    
-    if (currentFocusIndex === -1) {
-      newIndex = direction > 0 ? 0 : eventElements.length - 1;
-    } else {
-      newIndex = currentFocusIndex + direction;
-      if (newIndex >= eventElements.length) newIndex = 0;
-      if (newIndex < 0) newIndex = eventElements.length - 1;
-    }
-    
-    focusEvent(eventElements, newIndex);
-  };
-
-  const focusEvent = (eventElements: NodeListOf<HTMLElement>, index: number) => {
-    if (index >= 0 && index < eventElements.length) {
-      eventElements[index].focus();
-      currentEventIndex.current = index;
-    }
-  };
-
-  // Announce timeline changes to screen readers
-  useEffect(() => {
-    if (!isLoading && events.length > 0) {
-      const announcement = `Timeline loaded with ${events.length} extinction events. Use arrow keys to navigate between events, Enter or Space to view details.`;
-      
-      const announcer = document.createElement('div');
-      announcer.setAttribute('aria-live', 'polite');
-      announcer.className = 'sr-only';
-      announcer.textContent = announcement;
-      
-      document.body.appendChild(announcer);
-      
-      setTimeout(() => {
-        document.body.removeChild(announcer);
-      }, 2000);
-    }
-  }, [events.length, isLoading]);
-
-  // Loading state
-  if (isLoading) {
-    return (
-      <main role="main" aria-labelledby="main-title">
-        <LoadingSpinner message="Loading extinction timeline..." />
-      </main>
-    );
   }
 
-  // Error state
-  if (error) {
-    return (
-      <main role="main" aria-labelledby="main-title">
-        <section 
-          id="timeline" 
-          className="timeline"
-          role="alert"
-          aria-live="assertive"
-        >
-          <ErrorDisplay 
-            message={error} 
-            onRetry={() => window.location.reload()} 
-          />
-        </section>
-      </main>
-    );
+  const handleEventClick = (event: EventData, index: number) => {
+    setActiveIndex(index)
+    onEventClick(event)
   }
 
-  // Empty state
-  if (events.length === 0) {
-    return (
-      <main role="main" aria-labelledby="main-title">
-        <section 
-          id="timeline" 
-          className="timeline"
-          role="status"
-          aria-live="polite"
-        >
-          <div className="no-events">
-            <h3>No events found</h3>
-            <p>Try adjusting your filter selection to see more extinction events.</p>
-          </div>
-        </section>
-      </main>
-    );
+  const handleMarkerFocus = (index: number) => {
+    setActiveIndex(index)
   }
 
-  // Main timeline content
   return (
-    <main role="main" aria-labelledby="main-title">
-      <section 
-        id="timeline" 
-        className="timeline" 
-        ref={timelineRef}
-        role="region"
-        aria-labelledby="timeline-heading"
-        aria-describedby="timeline-instructions"
-        onKeyDown={handleTimelineKeyDown}
-        tabIndex={-1}
+    <section 
+      ref={timelineRef}
+      className="timeline"
+      role="feed"
+      aria-label="Coldplay concerts timeline"
+      aria-describedby="timeline-instructions"
+      onKeyDown={handleKeyDown}
+    >
+      <div className="timeline-header">
+        <h2 className="timeline-title">Concert Timeline</h2>
+        <div 
+          id="timeline-instructions" 
+          className="timeline-instructions sr-only"
+        >
+          Use arrow keys to navigate between concerts. Press Enter or Space to view details.
+          Press Home to go to first concert, End to go to last concert.
+        </div>
+      </div>
+
+      {/* Visual timeline line */}
+      <div className="timeline-line" aria-hidden="true"></div>
+      
+      <div 
+        className="timeline-events"
+        role="group"
+        aria-label={`${sortedEvents.length} concert events`}
       >
-        <h2 id="timeline-heading" className="sr-only">
-          Timeline of extinct animals
-        </h2>
-        
-        <div id="timeline-instructions" className="sr-only">
-          Navigate through extinction events using arrow keys. Press Enter or Space to view detailed information about an event.
-        </div>
-
-        {/* Timeline line with semantic meaning */}
-        <div 
-          className="timeline-line" 
-          role="presentation" 
-          aria-hidden="true"
-        />
-
-        {/* Event markers */}
-        <div role="group" aria-label={`${events.length} extinction events`}>
-          {events.map((event, index) => (
+        {sortedEvents.map((event, index) => (
+          <div 
+            key={`${event.year}-${index}`}
+            ref={(el) => { markerRefs.current[index] = el }}
+            className="timeline-event-container"
+          >
             <EventMarker
-              key={event.id}
               event={event}
-              onClick={onEventClick}
               index={index}
-              totalEvents={events.length}
-              isActive={index === currentEventIndex.current}
+              isActive={activeIndex === index}
+              onClick={() => handleEventClick(event, index)}
             />
-          ))}
-        </div>
-        
-        {/* Live region for event announcements */}
-        <div 
-          id="event-announcements"
-          className="sr-only"
-          aria-live="polite"
-          aria-atomic="false"
-        />
-      </section>
-    </main>
-  );
-};
+          </div>
+        ))}
+      </div>
 
-export default Timeline;
+      {/* Live region for announcements */}
+      <div 
+        className="timeline-announcements sr-only"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {activeIndex >= 0 && activeIndex < sortedEvents.length && (
+          <>
+            Concert {activeIndex + 1} of {sortedEvents.length}: 
+            {sortedEvents[activeIndex].title} in {sortedEvents[activeIndex].year}
+          </>
+        )}
+      </div>
+    </section>
+  )
+}
