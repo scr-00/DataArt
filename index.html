@@ -3,28 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Coldplay Live Timeline</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Timeline App</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
+  <!-- HEADER -->
   <header>
-    <h1>🎵 Coldplay Live Timeline</h1>
-    <button id="theme-toggle">🎨 Toggle Theme</button>
-    <p>Explore Coldplay's legendary concerts through the years.</p>
+    <div class="logo">📅 Timeline App</div>
+    <button id="theme-toggle">🌙 Toggle Theme</button>
   </header>
 
-  <nav>
-    <p>Filters will be added here in future updates.</p>
-  </nav>
-
+  <!-- MAIN CONTENT -->
   <main>
-    <section id="timeline"></section>
+
+    <!-- FILTERS (EMPTY FOR NOW) -->
+    <nav id="filters">
+      <!-- Future filters -->
+    </nav>
+
+    <!-- TIMELINE -->
+    <section id="timeline">
+      <!-- Event markers will come here -->
+    </section>
+
   </main>
 
-  <div id="modal"></div>
+  <!-- MODAL -->
+  <div id="modal" class="hidden">
+    <div class="modal-content">
+      <button id="close-modal">❌</button>
+      <article id="modal-body"></article>
+    </div>
+  </div>
 
-  <!-- Load compiled JS -->
-  <script type="module" src="dist/index.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
