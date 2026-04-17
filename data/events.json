@@ -1,0 +1,58 @@
+[
+  {
+    "year": "2000",
+    "title": "Y2K",
+    "description": "Millennium bug scare",
+    "imageURL": "",
+    "category": "tech"
+  },
+  {
+    "year": "2007",
+    "title": "iPhone Launch",
+    "description": "Apple releases iPhone",
+    "imageURL": "",
+    "category": "tech"
+  },
+  {
+    "year": "2010",
+    "title": "Instagram",
+    "description": "Instagram launched",
+    "imageURL": "",
+    "category": "social"
+  },
+  {
+    "year": "2015",
+    "title": "AI Boom",
+    "description": "Rise of deep learning",
+    "imageURL": "",
+    "category": "tech"
+  },
+  {
+    "year": "2020",
+    "title": "COVID-19",
+    "description": "Global pandemic",
+    "imageURL": "",
+    "category": "health"
+  },
+  {
+    "year": "2022",
+    "title": "AI Tools",
+    "description": "AI tools become mainstream",
+    "imageURL": "",
+    "category": "tech"
+  },
+  {
+    "year": "2023",
+    "title": "ChatGPT Boom",
+    "description": "AI adoption grows",
+    "imageURL": "",
+    "category": "tech"
+  },
+  {
+    "year": "2025",
+    "title": "Future AI",
+    "description": "AI everywhere",
+    "imageURL": "",
+    "category": "future"
+  }
+]
