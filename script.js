@@ -37,3 +37,8 @@ function openModal(event) {
 closeModal.addEventListener("click", () => {
   modal.classList.add("hidden");
 });
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    document.getElementById("modal").classList.add("hidden");
+  }
+});
