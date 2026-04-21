@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #1e1e2f, #2b2b45);
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+}
